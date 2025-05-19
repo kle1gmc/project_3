@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог товаров</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/catalog">Каталог</a>
+            <a href="/about">О нас</a>
+            <a href="/login">Вход</a>
+            <a href="/register">Регистрация</a>
+        </nav>
+    </header>
+
+    <section class="catalog">
+        <h1>Наш каталог товаров</h1>
+        <div class="product-list">
+            {% for product in products %}
+                <div class="product">
+                    <h2>{{ product[1] }}</h2>
+                    <p>Цена: {{ product[2] }} руб.</p>
+                    <p>Количество: {{ product[3] }} шт.</p>
+                </div>
+            {% endfor %}
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <nav>
+            <a href="/">Главная</a>
+            <a href="/catalog">Каталог</a>
+            <a href="/about">О нас</a>
+            <a href="/login">Вход</a>
+            <a href="/register">Регистрация</a>
+        </nav>
+    </header>
+
+    <section class="home">
+        <h1>Вход</h1>
+        <form method="post" action="/login">
+            <label for="username">Имя пользователя:</label><br>
+            <input type="text" id="username" name="username" required><br><br>
+
+            <label for="password">Пароль:</label><br>
+            <input type="password" id="password" name="password" required><br><br>
+
+            <button type="submit">Войти</button>
+        </form>
+    </section>
+</body>
+</html>
