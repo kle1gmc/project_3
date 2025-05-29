@@ -63,8 +63,6 @@ def fetch_products():
     conn.close()
     return products
 
-# --- Исправленные роуты login и register с GET и POST ---
-
 @app.route('/login', methods=['GET', 'POST'])
 def login_page():
     if request.method == 'POST':
@@ -117,7 +115,7 @@ def register_page():
         return redirect(url_for('login_page'))
     return render_template('register.html')
 
-# --- API: аутентификация -- оставляем как есть ---
+# API аутентификация 
 
 @app.route('/api/register', methods=['POST'])
 def api_register():
@@ -177,7 +175,6 @@ def api_protected():
     current_user = get_jwt_identity()
     return jsonify(logged_in_as=current_user), 200
 
-# --- API продукты ---
 
 @app.route('/api/products', methods=['GET'])
 def get_products():
@@ -227,7 +224,7 @@ def delete_product(product_id):
     conn.close()
     return jsonify(msg="Product deleted"), 200
 
-# --- Страницы ---
+# Страницы
 
 @app.route('/')
 def home():
@@ -242,7 +239,7 @@ def catalog():
 def about():
     return render_template('about.html')
 
-# --- Обработчики ошибок JWT ---
+# Обработчики ошибок JWT
 
 @jwt.expired_token_loader
 def expired_token_callback(jwt_header, jwt_payload):
