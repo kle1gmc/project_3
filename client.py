@@ -2,8 +2,8 @@ from PyQt5.QtWidgets import QApplication, QWidget, QVBoxLayout, QPushButton, QLi
 import requests
 import json
 
-# Вставь сюда свой access_token, полученный с /api/login (например через Postman)
-ACCESS_TOKEN = "твой_длинный_access_token"
+
+ACCESS_TOKEN = "access_token"
 
 headers = {
     "Authorization": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc0NzY1NTE5NSwianRpIjoiZTE2ODZjMDMtZWQ3OC00ZDZiLTg0MTAtOGZjOTE3MDdlNzU1IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IjQiLCJuYmYiOjE3NDc2NTUxOTUsImNzcmYiOiJmYzEyNmY2My1lYzllLTQzYTUtYWQ0Ni1mZmYzNDE4ZDM4ZWEiLCJleHAiOjE3NDc2NTg3OTV9.ACXE6EjpRYzH9GiOkQucOhf_SwgKpO0lX2vsRvuyXx8",
@@ -69,21 +69,19 @@ class App(QWidget):
             try:
                 response = requests.post(
                     "http://localhost:5000/api/products",
-                    json={  # лучше использовать json=, а не data= для автоматической сериализации
+                    json={  
                         "name": name,
                         "price": float(price),
                         "quantity": int(quantity)
                     },
-                    headers=headers  # не забудь передать headers с токеном и content-type
+                    headers=headers  
                 )
 
-                # Попробуем распарсить JSON
                 try:
                     json_data = response.json()
                     formatted_json = json.dumps(json_data, indent=2, ensure_ascii=False)
                     self.output.append(f"Добавление товара:\n{response.status_code} {formatted_json}")
                 except Exception:
-                    # Если не JSON, просто выводим текст
                     self.output.append(f"Добавление товара:\n{response.status_code} {response.text}")
 
             except Exception as e:
